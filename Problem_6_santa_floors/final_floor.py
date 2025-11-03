@@ -1,30 +1,37 @@
-"""
-Santa Floors — Part One
+# santa_floors.py
 
-Given a string of parentheses:
-- '(' means go up one floor (+1)
-- ')' means go down one floor (-1)
+def final_floor(instructions):
 
-Calculate the final floor number Santa ends up on.
-"""
-
-
-def move_floor(char: str) -> int:
-    """
-    Returns +1 if '(' else -1 if ')'.
-    """
-    pass
+    floor = 0
+    for char in instructions:
+        if char == '(':
+            floor += 1
+        elif char == ')':
+            floor -= 1
+    return floor
 
 
-def final_floor(instructions: str) -> int:
-    """
-    Calculates the final floor Santa ends on.
-    """
-    pass
+def first_basement_position(instructions):
+   
+
+    floor = 0
+    for i, char in enumerate(instructions, start=1):
+        if char == '(':
+            floor += 1
+        elif char == ')':
+            floor -= 1
+        if floor == -1:
+            return i
+    return None  # if Santa never enters the basement
 
 
-# --- Main Program ---
+# Example usage
 if __name__ == "__main__":
-    instructions = input("Enter Santa's instructions (e.g. (()()) ): ").strip()
-    floor = final_floor(instructions)
-    print("Santa ends up on floor:", floor)
+    data = input("Enter Santa's directions (e.g. ()())(()): ")
+    print("Final Floor:", final_floor(data))
+    position = first_basement_position(data)
+    if position:
+        print("First enters basement at position:", position)
+    else:
+        print("Santa never enters the basement.")
+
